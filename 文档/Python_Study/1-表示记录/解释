@@ -1,0 +1,92 @@
+# List
+bob = ['Bob Smith', 42, 30000, 'software']
+sue = ['SUe Jones', 45, 40000, 'hardware']
+print(bob[0], bob[2])       # 获取姓名 薪水
+print(bob[0].split()[-1])   # Bob姓什么?
+sue[2] *= 1.25              # 给sue加薪25%
+print(sue)
+
+说明：
+Python split方法
+语法:str.split(str="", num=string.count(str)).
+str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。
+num -- 分割次数。
+索引值可正可负，正索引从0开始，从左往右；负索引从-1开始，从右往左。使用负数索引时，python会从最后一个元素开始计 数。最后一个元素的位置编号是-1；
+
+
+# 2.数据库类表
+bob = ['Bob Smith', 42, 30000, 'software']
+sue = ['SUe Jones', 45, 40000, 'hardware']
+people = [bob, sue]
+for person in people:
+    print(person)
+    print(person[0].split()[-1])
+    person[2] *= 1.20
+    print(person[2])
+print(people[1][0])
+
+pays1 = [person[2] for person in people]  # 收集薪酬信息
+print(pays1)
+
+pays2 = map(lambda x: x[2], people)
+print(list(pays2))
+
+pays3 = sum(person[2] for person in people)  # 生成器表达式， sum为内建函数
+print(pays3)
+
+people.append(['Tom', 50, 0, None])
+print(len(people))
+print(people[-1][0])
+
+
+说明：
+Python 匿名函数
+python 使用 lambda 来创建匿名函数。
+lambda只是一个表达式，函数体比def简单很多。
+lambda的主体是一个表达式，而不是一个代码块。仅仅能在lambda表达式中封装有限的逻辑进去。
+lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数。
+虽然lambda函数看起来只能写一行，却不等同于C或C++的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。
+语法
+lambda函数的语法只包含一个语句，如下：
+lambda [arg1 [,arg2,.....argn]]:expression
+
+Python map() 函数
+map() 会根据提供的函数对指定序列做映射。
+第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。
+语法
+map() 函数语法：
+map(function, iterable, ...)
+参数
+function -- 函数，有两个参数
+iterable -- 一个或多个序列
+返回值
+Python 2.x 返回列表。
+Python 3.x 返回迭代器。（List）
+
+
+# 3.Field标签
+NAME, AGE, PAY = range(3)
+bob = ['Bob Smith', 42, 10000]
+print(bob[NAME])
+print(PAY, bob[PAY])
+
+
+bob = [['name', 'Bob Smith'], ['age', 42], ['pay', 10000]]
+sue = [['name', 'Sue Jones'], ['age', 45], ['pay', 20000]]
+people = [bob, sue]
+for person in people:
+    for (name, value) in person:
+        if name == 'name':
+            print(value)
+
+
+def field(record, label):
+    for (fname, fvalue) in record:
+        if fname == label:
+            return fvalue
+
+
+print(field(bob, 'name'))
+print(field(sue, 'pay'))
+for rec in people:
+    print('age', field(rec, 'age'))  # 打印出所有年龄
